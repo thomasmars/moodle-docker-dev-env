@@ -1,4 +1,4 @@
-FROM php:7.0-fpm
+FROM php:5.6-fpm
 
 ENV PHP_IDE_CONFIG="serverName=moodledocker"
 
@@ -26,7 +26,7 @@ RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 
 RUN pecl config-set php_ini /usr/local/etc/php/config/php.ini
 RUN docker-php-ext-enable opcache
-RUN pecl install xdebug
+RUN pecl install xdebug-2.5.5
 RUN docker-php-ext-enable xdebug
 
 # Get composer

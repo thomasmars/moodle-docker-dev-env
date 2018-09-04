@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 
 services:
 #  mariadb:
@@ -26,55 +26,74 @@ services:
       POSTGRES_USER: moodle
       POSTGRES_PASSWORD: moodle
       POSTGRES_DB: moodle
+    volumes:
+      - postgres:/var/lib/postgresql
     ports:
       - "5432:5432"
-      # exposes 5432
-    networks:
-      - code-network
-
 
   php:
-#    build: ./dockerphp
-    build: ./dockerphp # Moodle 3.3 development release
-#    build: ./dockerphp/moodle27 # Moodle 2.7 stable
+#    build: ./dockerphp # Use together with "image" when creating a new image or updating existing
+#    image: moodle33 # Moodle 3.3
+    image: moodle35 # Moodle 3.5
+#    image: moodle342 # Moodle 3.4.2 for testing install of H5P 1.9
+#    image: moodle341 # Moodle 3.4.1 for testing install of H5P 1.9
+#    image: moodle34 # Moodle 3.4
+#    image: php56moodle33 # Moodle 3.3 and PHP 5.6 for testing GDPR compatibility
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
       - ./configs/php/php.ini:/usr/local/etc/php/php.ini
+      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
 #      Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
       - ./mod/hvp:/var/www/html/mod/hvp
+#      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
+#      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
+      # ATTO plugin
+#      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
 #      Comment in to add custom theme
 #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
+#      - ./themes/moove:/var/www/html/theme/moove
 #      Comment in to test moodle code quality tools
 #      - ./codechecker/moodle-plugin-ci:/var/www/mpc/
-    networks:
-      - code-network
+#      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
+      # Data privacy plugin for Moodle versions that does not have it
+#      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
 
   nginx:
-    build: ./nginx
+    image: nginx
     depends_on:
       - php
     volumes:
       - ./configs/nginx/default.conf:/etc/nginx/conf.d/default.conf
-# From php
+      # From php
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
+      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
+      #Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
       - ./mod/hvp:/var/www/html/mod/hvp
+#      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
+#      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
+      # ATTO plugin
+#      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
+      # Comment in to add custom theme
 #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
+#      - ./themes/moove:/var/www/html/theme/moove
+      # Certificates
+#      - ./sslcertificates:/sslcertificates
+      # Data privacy plugin for Moodle versions that does not have it
+#      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
+#      Comment in to test moodle code quality tools
+#      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
+
     ports:
       - "80:80"
-    networks:
-      - code-network
+#      - "443:443"
 
 volumes:
-  mysql:
+  postgres:
   moodle:
   moodledata:
-
-networks:
-  code-network:
-    driver: bridge

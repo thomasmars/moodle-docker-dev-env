@@ -1,0 +1,10 @@
+[submodule "dockerphp/moodlegit"]
+	path = dockerphp/moodlegit
+	url = https://github.com/thomasmars/moodle-docker-dev-env.git
+[submodule "automation"]
+	path = automation
+	url = https://github.com/thomasmars/upload-h5ps-automated.git
+	branch = moodle
+[submodule "mod/hvp"]
+	path = mod/hvp
+	url = https://github.com/h5p/h5p-moodle-plugin.git
