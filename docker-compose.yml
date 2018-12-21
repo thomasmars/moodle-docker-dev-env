@@ -1,24 +1,24 @@
 version: "2"
 
 services:
-#  mariadb:
-#    image: mariadb
-#    environment:
-#      MYSQL_ROOT_PASSWORD: secret-pw
-#      MYSQL_DATABASE: moodle
-#      MYSQL_USER: moodle
-#      MYSQL_PASSWORD: moodle
-##      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
-#      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
-##    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # The simple way to override the mariadb config.
-#    volumes:
-#      - mysql:/var/lib/mysql
-#      - ./mysql/config:/etc/mysql/conf.d
-##      - ./docker-runtime/mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
-#    ports:
-#      - "3000:3306"
-#    networks:
-#      - code-network
+  #  mariadb:
+  #    image: mariadb
+  #    environment:
+  #      MYSQL_ROOT_PASSWORD: secret-pw
+  #      MYSQL_DATABASE: moodle
+  #      MYSQL_USER: moodle
+  #      MYSQL_PASSWORD: moodle
+  ##      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
+  #      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
+  ##    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # The simple way to override the mariadb config.
+  #    volumes:
+  #      - mysql:/var/lib/mysql
+  #      - ./mysql/config:/etc/mysql/conf.d
+  ##      - ./docker-runtime/mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
+  #    ports:
+  #      - "3000:3306"
+  #    networks:
+  #      - code-network
 
   postgres:
     image: postgres:9.6.3
@@ -32,34 +32,43 @@ services:
       - "5432:5432"
 
   php:
-#    build: ./dockerphp # Use together with "image" when creating a new image or updating existing
-#    image: moodle33 # Moodle 3.3
-    image: moodle35 # Moodle 3.5
-#    image: moodle342 # Moodle 3.4.2 for testing install of H5P 1.9
-#    image: moodle341 # Moodle 3.4.1 for testing install of H5P 1.9
-#    image: moodle34 # Moodle 3.4
-#    image: php56moodle33 # Moodle 3.3 and PHP 5.6 for testing GDPR compatibility
+    #    build: ./dockerphp # Use together with "image" when creating a new image or updating existing
+    #    image: moodle27 # install script does not work on this one
+    #    image: moodle3-1-15
+    #    image: moodle33 # Moodle 3.3
+    #    image: moodle342 # Moodle 3.4.2 for testing install of H5P 1.9
+    #    image: moodle341 # Moodle 3.4.1 for testing install of H5P 1.9
+    #    image: moodle34 # Moodle 3.4
+    #    image: moodle340 # Moodle 3.4.0, 3.4 (Build: 20171113)
+    #    image: php56moodle33 # Moodle 3.3 and PHP 5.6 for testing GDPR compatibility
+    #    image: moodle35 # Moodle 3.5
+    #    image: moodle352
+    #    image: moodle353
+    image: moodle361
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
       - ./configs/php/php.ini:/usr/local/etc/php/php.ini
-      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
-#      Comment out for fresh install
+      #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
+      #      Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
       - ./mod/hvp:/var/www/html/mod/hvp
-#      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
-#      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
+      #      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
+      #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
       # ATTO plugin
-#      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
-#      Comment in to add custom theme
-#      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
-#      - ./themes/moove:/var/www/html/theme/moove
-#      Comment in to test moodle code quality tools
-#      - ./codechecker/moodle-plugin-ci:/var/www/mpc/
-#      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
+      #      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
+      #      Comment in to add custom theme
+      #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
+      #      - ./themes/moove:/var/www/html/theme/moove
+      #      - ./themes/fordson:/var/www/html/theme/fordson
+      #      Comment in to test moodle code quality tools
+      #      - ./codechecker/moodle-plugin-ci:/var/www/mpc/
+      #      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
       # Data privacy plugin for Moodle versions that does not have it
-#      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
+      #      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
+      # Debugging code for LTI
+  #      - ./dockerphp/moodlegit/mod/lti:/var/www/html/mod/lti
 
   nginx:
     image: nginx
@@ -71,23 +80,26 @@ services:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
-      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
+      #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
       - ./mod/hvp:/var/www/html/mod/hvp
-#      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
-#      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
-      # ATTO plugin
-#      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
-      # Comment in to add custom theme
-#      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
-#      - ./themes/moove:/var/www/html/theme/moove
-      # Certificates
-#      - ./sslcertificates:/sslcertificates
-      # Data privacy plugin for Moodle versions that does not have it
-#      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
-#      Comment in to test moodle code quality tools
-#      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
+        #      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
+        #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
+        # ATTO plugin
+        #      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
+        # Comment in to add custom theme
+        #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
+        #      - ./themes/moove:/var/www/html/theme/moove
+        #      - ./themes/fordson:/var/www/html/theme/fordson
+        # Certificates
+        #      - ./sslcertificates:/sslcertificates
+        # Data privacy plugin for Moodle versions that does not have it
+        #      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
+        #      Comment in to test moodle code quality tools
+        #      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
+      # Debugging code for LTI
+    #      - ./dockerphp/moodlegit/mod/lti:/var/www/html/mod/lti
 
     ports:
       - "80:80"
