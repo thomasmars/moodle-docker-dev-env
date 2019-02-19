@@ -44,7 +44,7 @@ services:
     #    image: moodle35 # Moodle 3.5
     #    image: moodle352
     #    image: moodle353
-    image: moodle361
+    image: moodle361:latest
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
@@ -69,6 +69,7 @@ services:
       #      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
       # Debugging code for LTI
   #      - ./dockerphp/moodlegit/mod/lti:/var/www/html/mod/lti
+      - xdebugprofiles:/xdebugprofiles/
 
   nginx:
     image: nginx
@@ -109,3 +110,4 @@ volumes:
   postgres:
   moodle:
   moodledata:
+  xdebugprofiles:
