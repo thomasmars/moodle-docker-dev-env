@@ -49,6 +49,6 @@ class build_installed_themes_task extends adhoc_task {
     }, $themenames);
 
     // Build the list of themes and cache them in local cache.
-    theme_build_css_for_themes($themeconfigs);
+//    theme_build_css_for_themes($themeconfigs);
   }
 }

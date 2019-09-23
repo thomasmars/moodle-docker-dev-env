@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  postgres:
+    image: postgres:9.6.3
+    environment:
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: moodle
+      POSTGRES_DB: moodle
+    volumes:
+      - testing_postgres:/var/lib/postgresql
+    ports:
+      - "5433:5432"
+
+  php:
+#    image: moodle30 # install script does not work on this one
+    image: moodle37:latest
+    volumes:
+      - testing_moodledata:/var/www/moodledata
+      - ./moodleupload:/moodleupload
+      - testing_moodle:/var/www/html
+      - ./configs/php/php.ini:/usr/local/etc/php/php.ini
+
+  nginx:
+    image: nginx
+    depends_on:
+      - php
+    volumes:
+      - ./configs/nginx/default.testing.conf:/etc/nginx/conf.d/default.conf
+      - testing_moodledata:/var/www/moodledata
+      - ./moodleupload:/moodleupload
+      - testing_moodle:/var/www/html
+
+    ports:
+      - "86:86"
+
+volumes:
+  testing_postgres:
+  testing_moodle:
+  testing_moodledata:

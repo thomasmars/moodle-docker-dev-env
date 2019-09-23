@@ -41,35 +41,42 @@ services:
     #    image: moodle34 # Moodle 3.4
     #    image: moodle340 # Moodle 3.4.0, 3.4 (Build: 20171113)
     #    image: php56moodle33 # Moodle 3.3 and PHP 5.6 for testing GDPR compatibility
-    #    image: moodle35 # Moodle 3.5
     #    image: moodle352
-    #    image: moodle353
-    image: moodle361:latest
+#    image: moodle353
+#    image: moodle36:latest
+#    image: moodle37dev:latest
+    image: moodle37:latest
+#    image: moodle35:latest # Moodle 3.5
+    #    image: moodle34 # Moodle 3.4
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
       - ./configs/php/php.ini:/usr/local/etc/php/php.ini
-      #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
+      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #      Comment out for fresh install
-      - ./moodleconfig/config.php:/var/www/html/config.php
+      - ./moodleconfig/config.php:/var/www/html/config.php/
       - ./mod/hvp:/var/www/html/mod/hvp
       #      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
       #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
       # ATTO plugin
       #      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
+#      - ./attoplugins/moodle-atto_morefontcolors:/var/www/html/lib/editor/atto/plugins/morefontcolors
+#      - ./attoplugins/atto_styles:/var/www/html/lib/editor/atto/plugins/styles
+      #        Filters
+#      - ./filters/h5p:/var/www/html/filter/h5p
       #      Comment in to add custom theme
       #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
       #      - ./themes/moove:/var/www/html/theme/moove
       #      - ./themes/fordson:/var/www/html/theme/fordson
       #      Comment in to test moodle code quality tools
-      #      - ./codechecker/moodle-plugin-ci:/var/www/mpc/
-      #      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
+      - ./codechecker/moodle-plugin-ci:/var/www/mpc/
+#      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
       # Data privacy plugin for Moodle versions that does not have it
       #      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
       # Debugging code for LTI
   #      - ./dockerphp/moodlegit/mod/lti:/var/www/html/mod/lti
-      - xdebugprofiles:/xdebugprofiles/
+#      - xdebugprofiles:/xdebugprofiles/
 
   nginx:
     image: nginx
@@ -81,7 +88,7 @@ services:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
-      #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
+      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
       - ./mod/hvp:/var/www/html/mod/hvp
@@ -89,6 +96,10 @@ services:
         #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
         # ATTO plugin
         #      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
+#      - ./attoplugins/moodle-atto_morefontcolors:/var/www/html/lib/editor/atto/plugins/morefontcolors
+#      - ./attoplugins/atto_styles:/var/www/html/lib/editor/atto/plugins/styles
+#        Filters
+#      - ./filters/h5p:/var/www/html/filter/h5p
         # Comment in to add custom theme
         #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
         #      - ./themes/moove:/var/www/html/theme/moove
