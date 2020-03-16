@@ -1,24 +1,22 @@
 version: "2"
 
 services:
-  #  mariadb:
-  #    image: mariadb
-  #    environment:
-  #      MYSQL_ROOT_PASSWORD: secret-pw
-  #      MYSQL_DATABASE: moodle
-  #      MYSQL_USER: moodle
-  #      MYSQL_PASSWORD: moodle
-  ##      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
-  #      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
-  ##    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # The simple way to override the mariadb config.
-  #    volumes:
-  #      - mysql:/var/lib/mysql
-  #      - ./mysql/config:/etc/mysql/conf.d
-  ##      - ./docker-runtime/mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
-  #    ports:
-  #      - "3000:3306"
-  #    networks:
-  #      - code-network
+#  mariadb:
+#    image: mariadb:latest
+#    environment:
+#      MYSQL_ROOT_PASSWORD: secret-pw
+#      MYSQL_DATABASE: moodle
+#      MYSQL_USER: moodle
+#      MYSQL_PASSWORD: moodle
+##      command: --default-character-set=utf8mb4 --innodb_file_format=Barracuda --innodb_file_per_table=1 --innodb_large_prefix --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci --default-character-set=utf8mb4
+##    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # The simple way to override the mariadb config.
+#    command:  --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --collation_server=utf8mb4_unicode_ci
+#    volumes:
+#      - mysql:/var/lib/mysql
+#      - ./mysql/config:/etc/mysql/conf.d
+##      - ./docker-runtime/mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
+#    ports:
+#      - "3000:3306"
 
   postgres:
     image: postgres:9.6.3
@@ -45,17 +43,23 @@ services:
 #    image: moodle353
 #    image: moodle36:latest
 #    image: moodle37dev:latest
-    image: moodle37:latest
+#    image: moodle37:latest
+#    image: moodle38dev:latest
 #    image: moodle35:latest # Moodle 3.5
     #    image: moodle34 # Moodle 3.4
+#    image: moodle35:7 # Moodle 3.5.7
+#    image: moodle38beta:latest # Moodle 3.8.0-beta
+#    image: moodle38stable:latest
+    image: php74moodle38
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
+#      - ./dockerphp/moodlegit/mod/lti:/var/www/html/mod/lti
       - ./configs/php/php.ini:/usr/local/etc/php/php.ini
       - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #      Comment out for fresh install
-      - ./moodleconfig/config.php:/var/www/html/config.php/
+      - ./moodleconfig/config.php:/var/www/html/config.php
       - ./mod/hvp:/var/www/html/mod/hvp
       #      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
       #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
@@ -92,8 +96,8 @@ services:
       #Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
       - ./mod/hvp:/var/www/html/mod/hvp
-        #      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
-        #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
+#              - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
+#              - ./privacyutils/compliance.php:/var/www/html/compliance2.php
         # ATTO plugin
         #      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
 #      - ./attoplugins/moodle-atto_morefontcolors:/var/www/html/lib/editor/atto/plugins/morefontcolors
@@ -122,3 +126,4 @@ volumes:
   moodle:
   moodledata:
   xdebugprofiles:
+  mysql:

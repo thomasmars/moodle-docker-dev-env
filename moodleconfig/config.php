@@ -51,7 +51,7 @@ $CFG->directorypermissions = 02777;
 
 // H5P Specific
 $CFG->mod_hvp_backup_libraries = '0';
-//$CFG->mod_hvp_dev = '1';
+$CFG->mod_hvp_dev = '1';
 
 
 $CFG->mod_hvp_library_config = array(
@@ -93,6 +93,11 @@ $CFG->debugdisplay = 1;              // NOT FOR PRODUCTION SERVERS!
 // debug messages, this overrides the debug flag in $CFG->debug and $CFG->debugdisplay
 // for these users only.
 //$CFG->debugusers = '2';
+
+
+// PHP unit
+$CFG->phpunit_prefix = 'phpu_';
+$CFG->phpunit_dataroot = '/var/www/phpu_moodledata';
 
 require_once(__DIR__ . '/lib/setup.php');
 

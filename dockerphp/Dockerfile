@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.4.2-fpm
 
 ENV PHP_IDE_CONFIG="serverName=moodledocker"
 
@@ -11,7 +11,9 @@ RUN apt-get update \
         sendmail \
         libxml2-dev \
         libicu-dev \
-        libpq-dev
+        libpq-dev \
+        git \
+        libzip-dev
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install zip
@@ -31,7 +33,7 @@ RUN docker-php-ext-enable xdebug
 
 # Get composer and verify its signature, update hash if you get corrupt installer message
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php --install-dir /usr/local/bin --filename=composer
 
 COPY --chown=www-data:www-data moodlegit /var/www/html
@@ -44,10 +46,10 @@ RUN chmod -R 777 /xdebugprofiles
 
 # Set permissions for server
 RUN ["mkdir", "moodledata"]
-RUN ["chown", "-R", "www-data:www-data", "/var/www/html"]
-RUN ["chmod", "-R", "777", "/var/www/html"]
-RUN ["chown", "-R", "www-data:www-data", "/var/www/moodledata"]
-RUN ["chmod", "-R", "777", "/var/www/moodledata"]
+RUN ["mkdir", "phpu_moodledata"]
+RUN ["mkdir", ".composer"]
+RUN ["chown", "-R", "www-data:www-data", "/var/www"]
+RUN ["chmod", "-R", "777", "/var/www"]
 USER www-data:www-data
 
 WORKDIR /var/www/html

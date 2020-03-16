@@ -14,12 +14,19 @@ services:
 
   php:
 #    image: moodle30 # install script does not work on this one
-    image: moodle37:latest
+#    image: moodle32:latest  # Earlier versions must use earlier php versions..
+    image: moodle38:latest
+#    image: moodle38dev:latest
+#    image: moodle33 # Moodle 3.3
+#    image: moodle37:latest
+#    image: moodle35:latest
     volumes:
       - testing_moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - testing_moodle:/var/www/html
       - ./configs/php/php.ini:/usr/local/etc/php/php.ini
+#      - ./moodleconfig/config.testing.php:/var/www/html/config.php/
+  #      - ./mod/hvp:/var/www/html/mod/hvp
 
   nginx:
     image: nginx
@@ -30,6 +37,8 @@ services:
       - testing_moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - testing_moodle:/var/www/html
+#      - ./moodleconfig/config.testing.php:/var/www/html/config.php/
+    #      - ./mod/hvp:/var/www/html/mod/hvp
 
     ports:
       - "86:86"
