@@ -3,8 +3,12 @@
 	url = https://github.com/moodle/moodle.git
 [submodule "automation"]
 	path = automation
-	url = https://github.com/thomasmars/upload-h5ps-automated.git
+	url = git@github.com:thomasmars/upload-h5ps-automated.git
 	branch = moodle
 [submodule "mod/hvp"]
 	path = mod/hvp
 	url = https://github.com/h5p/h5p-moodle-plugin.git
+[submodule "codechecker/moodle-plugin-ci"]
+	path = codechecker/moodle-plugin-ci
+	url = git@github.com:blackboard-open-source/moodle-plugin-ci.git
+
