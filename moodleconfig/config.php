@@ -38,7 +38,7 @@ $CFG->dbhost    = 'postgres';
 
 
 //$CFG->wwwroot   = 'http://localhost';
-$CFG->wwwroot   = 'http://192.168.1.127';
+$CFG->wwwroot   = 'http://localhost';
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 
