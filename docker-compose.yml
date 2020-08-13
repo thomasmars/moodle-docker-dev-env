@@ -50,7 +50,8 @@ services:
 #    image: moodle35:7 # Moodle 3.5.7
 #    image: moodle38beta:latest # Moodle 3.8.0-beta
 #    image: moodle38stable:latest
-    image: php74moodle38
+#    image: php74moodle38
+    image: moodle391:latest
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
@@ -59,8 +60,8 @@ services:
       - ./configs/php/php.ini:/usr/local/etc/php/php.ini
       - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #      Comment out for fresh install
-      - ./moodleconfig/config.php:/var/www/html/config.php
-      - ./mod/hvp:/var/www/html/mod/hvp
+#      - ./moodleconfig/config.php:/var/www/html/config.php
+#      - ./mod/hvp:/var/www/html/mod/hvp
       #      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
       #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
       # ATTO plugin
@@ -94,8 +95,8 @@ services:
       - moodle:/var/www/html
       - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #Comment out for fresh install
-      - ./moodleconfig/config.php:/var/www/html/config.php
-      - ./mod/hvp:/var/www/html/mod/hvp
+#      - ./moodleconfig/config.php:/var/www/html/config.php
+#      - ./mod/hvp:/var/www/html/mod/hvp
 #              - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
 #              - ./privacyutils/compliance.php:/var/www/html/compliance2.php
         # ATTO plugin

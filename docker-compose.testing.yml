@@ -15,7 +15,7 @@ services:
   php:
 #    image: moodle30 # install script does not work on this one
 #    image: moodle32:latest  # Earlier versions must use earlier php versions..
-    image: moodle38:latest
+    image: moodle391:latest
 #    image: moodle38dev:latest
 #    image: moodle33 # Moodle 3.3
 #    image: moodle37:latest
