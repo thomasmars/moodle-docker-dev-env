@@ -36,6 +36,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php --install-dir /usr/local/bin --filename=composer
 
+# Set permissions for server
+RUN ["chown", "-R", "www-data:www-data", "/var/www"]
+RUN ["chmod", "-R", "777", "/var/www"]
+
 COPY --chown=www-data:www-data moodlegit /var/www/html
 
 WORKDIR /var/www
@@ -44,13 +48,10 @@ RUN mkdir /xdebugprofiles
 RUN chown -R www-data /xdebugprofiles
 RUN chmod -R 777 /xdebugprofiles
 
-# Set permissions for server
+USER www-data:www-data
 RUN ["mkdir", "moodledata"]
 RUN ["mkdir", "phpu_moodledata"]
 RUN ["mkdir", ".composer"]
-RUN ["chown", "-R", "www-data:www-data", "/var/www"]
-RUN ["chmod", "-R", "777", "/var/www"]
-USER www-data:www-data
 
 WORKDIR /var/www/html
 

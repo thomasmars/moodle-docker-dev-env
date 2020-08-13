@@ -58,7 +58,7 @@ services:
       - moodle:/var/www/html
 #      - ./dockerphp/moodlegit/mod/lti:/var/www/html/mod/lti
       - ./configs/php/php.ini:/usr/local/etc/php/php.ini
-      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
+#      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #      Comment out for fresh install
 #      - ./moodleconfig/config.php:/var/www/html/config.php
 #      - ./mod/hvp:/var/www/html/mod/hvp
@@ -93,7 +93,7 @@ services:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
       - moodle:/var/www/html
-      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
+#      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #Comment out for fresh install
 #      - ./moodleconfig/config.php:/var/www/html/config.php
 #      - ./mod/hvp:/var/www/html/mod/hvp
