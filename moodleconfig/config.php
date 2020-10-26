@@ -37,7 +37,8 @@ $CFG->dbhost    = 'postgres';
 // End postgres
 
 
-//$CFG->wwwroot   = 'http://localhost';
+//$CFG->wwwroot   = 'https://moodlar.ngrok.io';
+//$CFG->sslproxy = true;
 $CFG->wwwroot   = 'http://localhost';
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
@@ -84,10 +85,10 @@ $CFG->mod_hvp_library_config = array(
 //=========================================================================
 //
 // Force a debugging mode regardless the settings in the site administration
-@error_reporting(E_ALL);   // NOT FOR PRODUCTION SERVERS!
-@ini_set('display_errors', '1');         // NOT FOR PRODUCTION SERVERS!
-$CFG->debug = (E_ALL);   // === DEBUG_DEVELOPER - NOT FOR PRODUCTION SERVERS!
-$CFG->debugdisplay = 1;              // NOT FOR PRODUCTION SERVERS!
+//@error_reporting(E_ALL);   // NOT FOR PRODUCTION SERVERS!
+//@ini_set('display_errors', '1');         // NOT FOR PRODUCTION SERVERS!
+//$CFG->debug = (E_ALL);   // === DEBUG_DEVELOPER - NOT FOR PRODUCTION SERVERS!
+//$CFG->debugdisplay = 1;              // NOT FOR PRODUCTION SERVERS!
 //
 // You can specify a comma separated list of user ids that that always see
 // debug messages, this overrides the debug flag in $CFG->debug and $CFG->debugdisplay
