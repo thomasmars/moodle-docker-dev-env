@@ -13,9 +13,12 @@ RUN apt-get update \
         libicu-dev \
         libpq-dev \
         git \
-        libzip-dev
+        libzip-dev \
+        locales
 RUN rm -rf /var/lib/apt/lists/*
 
+RUN locale-gen en_AU.UTF-8
+RUN localedef -v -c -i en_AU -f UTF-8 en_AU.UTF-8
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install gd
