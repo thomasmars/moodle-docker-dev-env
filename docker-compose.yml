@@ -30,30 +30,7 @@ services:
       - "5432:5432"
 
   php:
-    #    build: ./dockerphp # Use together with "image" when creating a new image or updating existing
-    #    image: moodle27 # install script does not work on this one
-    #    image: moodle3-1-15
-    #    image: moodle33 # Moodle 3.3
-    #    image: moodle342 # Moodle 3.4.2 for testing install of H5P 1.9
-    #    image: moodle341 # Moodle 3.4.1 for testing install of H5P 1.9
-    #    image: moodle34 # Moodle 3.4
-    #    image: moodle340 # Moodle 3.4.0, 3.4 (Build: 20171113)
-    #    image: php56moodle33 # Moodle 3.3 and PHP 5.6 for testing GDPR compatibility
-    #    image: moodle352
-#    image: moodle353
-#    image: moodle36:latest
-#    image: moodle37dev:latest
-#    image: moodle37:latest
-#    image: moodle38dev:latest
-#    image: moodle35:latest # Moodle 3.5
-    #    image: moodle34 # Moodle 3.4
-#    image: moodle35:7 # Moodle 3.5.7
-#    image: moodle38beta:latest # Moodle 3.8.0-beta
-#    image: moodle38stable:latest
-#    image: php74moodle38
-#    image: php74moodle382
-#    image: moodle3832
-    image: php74moodle39
+    build: ./dockerphp # Use together with "image" when creating a new image or updating existing
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload

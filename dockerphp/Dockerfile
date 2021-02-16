@@ -1,4 +1,4 @@
-FROM php:7.4.2-fpm
+FROM php:7.4-fpm
 
 ENV PHP_IDE_CONFIG="serverName=moodledocker"
 
@@ -33,7 +33,7 @@ RUN docker-php-ext-enable xdebug
 
 # Get composer and verify its signature, update hash if you get corrupt installer message
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php --install-dir /usr/local/bin --filename=composer
 
 # Set permissions for server

@@ -38,7 +38,8 @@ $CFG->dbhost    = 'postgres';
 
 
 //$CFG->wwwroot   = 'http://localhost';
-$CFG->wwwroot   = 'http://localhost';
+$CFG->wwwroot   = 'https://moodlar.eu.ngrok.io';
+$CFG->sslproxy = 1;
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 
