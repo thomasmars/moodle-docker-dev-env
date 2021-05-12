@@ -12,3 +12,9 @@
 	path = codechecker/moodle-plugin-ci
 	url = git@github.com:blackboard-open-source/moodle-plugin-ci.git
 
+[submodule "moodlehq/moodle-plugin-ci"]
+	path = moodlehq/moodle-plugin-ci
+	url = git@github.com:moodlehq/moodle-plugin-ci.git
+[submodule "themes/h5pmods-moodle-plugin"]
+	path = themes/h5pmods-moodle-plugin
+	url = git@github.com:h5p/h5pmods-moodle-plugin.git
