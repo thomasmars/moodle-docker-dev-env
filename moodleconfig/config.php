@@ -37,7 +37,7 @@ $CFG->dbhost    = 'postgres';
 // End postgres
 
 
-//$CFG->wwwroot   = 'http://localhost';
+//$CFG->wwwroot   = 'http://localhost/moodle';
 $CFG->wwwroot   = 'https://moodlar.eu.ngrok.io';
 $CFG->sslproxy = 1;
 $CFG->dataroot  = '/var/www/moodledata';
@@ -52,32 +52,32 @@ $CFG->directorypermissions = 02777;
 
 // H5P Specific
 $CFG->mod_hvp_backup_libraries = '0';
-$CFG->mod_hvp_dev = '1';
+#$CFG->mod_hvp_dev = '1';
 
 
-$CFG->mod_hvp_library_config = array(
-    "H5P.MathDisplay" => array(
-        "observers" => array(
-            array("name" => "mutationObserver", "params" => array("cooldown" => 500)),
-            array("name" => "domChangedListener"),
-            array("name" => "interval", "params" => array("time" => 1000))
-        ),
-        "renderer" => array(
-            "mathjax" => array(
-                "src" => "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js",
-                "config" => array(
-                    "extensions" => array("tex2jax.js"),
-                    "jax" => array("input/TeX", "output/HTML-CSS"),
-                    "tex2jax" => array(
-                        // Important, otherwise MathJax will be rendered inside CKEditor
-                        "ignoreClass" => "ckeditor"
-                    ),
-                    "messageStyle" => "none"
-                )
-            )
-        )
-    )
-);
+#$CFG->mod_hvp_library_config = array(
+#    "H5P.MathDisplay" => array(
+#        "observers" => array(
+#            array("name" => "mutationObserver", "params" => array("cooldown" => 500)),
+#            array("name" => "domChangedListener"),
+#            array("name" => "interval", "params" => array("time" => 1000))
+#        ),
+#        "renderer" => array(
+#            "mathjax" => array(
+#                "src" => "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js",
+#                "config" => array(
+#                    "extensions" => array("tex2jax.js"),
+#                    "jax" => array("input/TeX", "output/HTML-CSS"),
+#                    "tex2jax" => array(
+#                        // Important, otherwise MathJax will be rendered inside CKEditor
+#                        "ignoreClass" => "ckeditor"
+#                    ),
+#                    "messageStyle" => "none"
+#                )
+#            )
+#        )
+#    )
+#);
 
 
 //=========================================================================

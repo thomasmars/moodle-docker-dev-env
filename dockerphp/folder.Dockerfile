@@ -18,7 +18,7 @@ RUN apt-get update \
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN locale-gen en_AU.UTF-8
-RUN localedef -v -c -i en_AU -f UTF-8 en_AU.UTF-8
+#RUN localedef -v -c -i en_AU -f UTF-8 en_AU.UTF-8
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install gd
@@ -29,7 +29,7 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
   && docker-php-ext-install pdo pdo_pgsql pgsql
 
-RUN pecl config-set php_ini /usr/local/etc/php/config/php.ini
+#RUN pecl config-set php_ini /usr/local/etc/php/config/php.ini
 RUN docker-php-ext-enable opcache
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
@@ -46,7 +46,7 @@ RUN php composer-setup.php --install-dir /usr/local/bin --filename=composer
 RUN ["chown", "-R", "www-data:www-data", "/var/www"]
 RUN ["chmod", "-R", "777", "/var/www"]
 
-COPY --chown=www-data:www-data moodlegit /var/www/html
+COPY --chown=www-data:www-data moodlegit /var/www/html/moodle
 
 WORKDIR /var/www
 

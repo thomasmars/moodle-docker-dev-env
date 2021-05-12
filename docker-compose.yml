@@ -29,8 +29,42 @@ services:
     ports:
       - "5432:5432"
 
+#  # PHP in a folder
+#  php:
+#    #    build: ./dockerphp # Use together with "image" when creating a new image or updating existing
+#    # Moodle in a folder
+#    image: moodle310folder
+#    volumes:
+#      - moodledata:/var/www/moodledata
+#      - ./moodleupload:/moodleupload
+#      - moodle:/var/www/html/moodle
+#      - ./configs/php/php.ini:/usr/local/etc/php/php.ini
+#      #      Comment out for fresh install
+#      - ./moodleconfig/config.php:/var/www/html/moodle/config.php
+#      - ./mod/hvp:/var/www/html/moodle/mod/hvp
+#    expose:
+#      - "9001"
+#
+#  nginx:
+#    image: nginx
+#    depends_on:
+#      - php
+#    volumes:
+#      - ./configs/nginx/default.conf:/etc/nginx/conf.d/default.conf
+#      # From php
+#      - moodledata:/var/www/moodledata
+#      - ./moodleupload:/moodleupload
+#      - moodle:/var/www/html/moodle
+#      #Comment out for fresh install
+#      - ./moodleconfig/config.php:/var/www/html/moodle/config.php
+#      - ./mod/hvp:/var/www/html/moodle/mod/hvp
+#    ports:
+#      - "80:80"
+
   php:
     build: ./dockerphp # Use together with "image" when creating a new image or updating existing
+    # Moodle in a folder
+#    image: moodle310folder
     volumes:
       - moodledata:/var/www/moodledata
       - ./moodleupload:/moodleupload
@@ -40,8 +74,8 @@ services:
 #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #      Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
-      - ./mod/hvp:/var/www/html/mod/hvp
-      #      - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
+      #- ./mod/hvp:/var/www/html/mod/hvp
+      # >>     - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
       #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
       # ATTO plugin
       #      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
@@ -50,17 +84,19 @@ services:
       #        Filters
 #      - ./filters/h5p:/var/www/html/filter/h5p
       #      Comment in to add custom theme
-      #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
+      #- ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
       #      - ./themes/moove:/var/www/html/theme/moove
       #      - ./themes/fordson:/var/www/html/theme/fordson
       #      Comment in to test moodle code quality tools
-      - ./codechecker/moodle-plugin-ci:/var/www/mpc/
+      - ./moodlehq/moodle-plugin-ci:/var/www/mpc/
 #      - ./codechecker/local/codechecker:/var/www/html/local/codechecker
       # Data privacy plugin for Moodle versions that does not have it
       #      - ./mod/tool_dataprivacy:/var/www/html/admin/tool/dataprivacy
       # Debugging code for LTI
   #      - ./dockerphp/moodlegit/mod/lti:/var/www/html/mod/lti
 #      - xdebugprofiles:/xdebugprofiles/
+    expose:
+      - "9001"
 
   nginx:
     image: nginx
@@ -75,8 +111,9 @@ services:
 #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
-      - ./mod/hvp:/var/www/html/mod/hvp
-#              - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
+      #- ./mod/hvp:/var/www/html/mod/hvp
+#      - ./configs/php/php.ini:/usr/local/etc/php/php.ini
+        #              - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
 #              - ./privacyutils/compliance.php:/var/www/html/compliance2.php
         # ATTO plugin
         #      - ./mod/atto_hvp:/var/www/html/lib/editor/atto/plugins/hvp
@@ -85,7 +122,7 @@ services:
 #        Filters
 #      - ./filters/h5p:/var/www/html/filter/h5p
         # Comment in to add custom theme
-        #      - ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
+      #- ./themes/h5pmods-moodle-plugin:/var/www/html/theme/h5pmod
         #      - ./themes/moove:/var/www/html/theme/moove
         #      - ./themes/fordson:/var/www/html/theme/fordson
         # Certificates
