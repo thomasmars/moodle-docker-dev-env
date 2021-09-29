@@ -74,7 +74,7 @@ services:
 #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #      Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
-      #- ./mod/hvp:/var/www/html/mod/hvp
+#      - ./mod/hvp:/var/www/html/mod/hvp
       # >>     - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
       #      - ./privacyutils/compliance.php:/var/www/html/compliance2.php
       # ATTO plugin
@@ -111,7 +111,7 @@ services:
 #      - ./skipCronCssRebuild/build_installed_themes_task.php:/var/www/html/lib/classes/task/build_installed_themes_task.php
       #Comment out for fresh install
       - ./moodleconfig/config.php:/var/www/html/config.php
-      #- ./mod/hvp:/var/www/html/mod/hvp
+#      - ./mod/hvp:/var/www/html/mod/hvp
 #      - ./configs/php/php.ini:/usr/local/etc/php/php.ini
         #              - ./privacyutils/exportdata.php:/var/www/html/exportdata2.php
 #              - ./privacyutils/compliance.php:/var/www/html/compliance2.php
