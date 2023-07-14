@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 ENV PHP_IDE_CONFIG="serverName=moodledocker"
 
@@ -23,7 +23,8 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install xmlrpc
+RUN pecl install channel://pecl.php.net/xmlrpc-1.0.0RC3 xmlrpc
+RUN docker-php-ext-enable xmlrpc
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install intl
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
@@ -39,7 +40,7 @@ RUN apt-get -y install nodejs
 
 # Get composer and verify its signature, update hash if you get corrupt installer message
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php --install-dir /usr/local/bin --filename=composer
 
 # Set permissions for server
