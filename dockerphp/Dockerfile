@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.4.27-fpm
 
 ENV PHP_IDE_CONFIG="serverName=moodledocker"
 
